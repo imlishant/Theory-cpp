@@ -8,6 +8,80 @@
 
 using namespace std;
 
+bool f(int x, int y){
+    return x > y;
+}
+
+void vectorDemo()
+{
+    vector<int> A = {14, 23, 98, 12, 34};
+    cout << A[1];
+    sort(A.begin(), A.end()); // O(Nlog(N))
+    // 12, 14, 23, 34, 98
+    bool present = binary_search(A.begin(), A.end(), 14); // true // O(logN)
+    present = binary_search(A.begin(), A.end(), 4); // false
+    A.push_back(100);
+    present = binary_search(A.begin(), A.end(), 100); // true
+    // 12, 14, 23, 34, 98, 100
+    A.push_back(100);
+    A.push_back(100);
+    A.push_back(100);
+    A.push_back(100);
+    A.push_back(54);
+    // 12, 14, 23, 34, 98, 100, 100, 100, 100, 100, 54;
+    vector<int>::iterator it = lower_bound(A.begin(), A.end(), 100); // >=
+    vector<int>::iterator it1 = upper_bound(A.begin(), A.end(), 100); // >
+    
+    cout << *it << " " << *it1 << "\n";
+    cout << it1 - it << "\n";
+    
+    sort(A.begin(), A.end(), f); // f is function parameter
+    vector<int>::iterator it2;
+    for(it2 = A.begin(); it2 != A.end(); it2++){
+        cout << *it2 << " ";
+    }
+    /*
+    auto it
+    for(int x : A){
+        cout << x << " ";
+    }
+    */
+    cout << endl;
+    
+}
+
+void setDemo()
+{
+    set<int> S;
+    S.insert(23);
+    S.insert(78);
+    S.insert(3);
+    S.insert(2);
+    for(int x : S){
+        cout << x << " ";
+    }
+    cout << endl;
+    // 2, 3, 12, 78
+    auto it = S.find(23);       // log(N)
+    if(it == S.end()){
+        cout << "oops! not present... \n";
+    }
+    else{
+        cout << " It's present.";
+    }
+    auto it2 = S.lower_bound(12);
+    auto it3 = S.lower_bound(11);
+    cout << *it2 << " " << *it3;
+    
+    auto it4 = S.upper_bound(78);
+    if(it4 == S.end()){
+        cout << "oops! not found..";
+    }
+    else cout << endl << *it4 ;
+    // can erase S.erase(key) in log(N)
+    
+}
+
 void mapDemo()
 {   // A.find(key) and A.erase(key) in log(N)
     map<int, int> A;
@@ -17,7 +91,7 @@ void mapDemo()
     A[199934] = 9834;
     
     map<char, int> cnt;
-    string x = "lishtant sahu";
+    string x = "lishant sahu";
     
     for(char c : x){
         cnt[c]++;
@@ -59,6 +133,9 @@ void PowerofSTL()
 
 int main()
 {
-    // C++ STL
-    PowerofSTL();
+    
+    //PowerofSTL();
+    //mapDemo();
+    //vectorDemo();
+    //setDemo();
 }
